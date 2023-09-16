@@ -1,6 +1,6 @@
-# ACL Test
+# srl-hackathon
 
-This is a trimmed repo that deploys a minimal topology for testing ACLs.
+Containerlab configs for Hackathon
 
 ## How does this work then?
 
