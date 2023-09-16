@@ -98,8 +98,6 @@ topology:
         WORDPRESS_DB_PASSWORD: wordpress
         WORDPRESS_DB_NAME: wordpress
       exec:
-        - apt update
-        - apt install iproute2
         - ip addr add 192.168.0.80/24 dev eth1
     wordpress-db:
       kind: linux
@@ -113,8 +111,6 @@ topology:
         MYSQL_USER: wordpress
         MYSQL_PASSWORD: wordpress
       exec:
-        - apt update
-        - apt install iproute2
         - ip addr add 192.168.0.81/24 dev eth1
 
 
