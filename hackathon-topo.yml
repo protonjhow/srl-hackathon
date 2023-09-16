@@ -89,10 +89,10 @@ topology:
       kind: linux
       image: wordpress:latest
       env:
-        - WORDPRESS_DB_HOST=db
-        - WORDPRESS_DB_USER=wordpress
-        - WORDPRESS_DB_PASSWORD=wordpress
-        - WORDPRESS_DB_NAME=wordpress
+        WORDPRESS_DB_HOST: 192.168.0.81
+        WORDPRESS_DB_USER: wordpress
+        WORDPRESS_DB_PASSWORD: wordpress
+        WORDPRESS_DB_NAME: wordpress
       exec:
         - ip addr add 192.168.0.80/24 dev eth1
     wordpress-db:
@@ -102,10 +102,10 @@ topology:
       binds: 
         - ./wordpress/db/:/var/lib/mysql/
       env:
-        - MYSQL_ROOT_PASSWORD=somewordpress
-        - MYSQL_DATABASE=wordpress
-        - MYSQL_USER=wordpress
-        - MYSQL_PASSWORD=wordpress
+        MYSQL_ROOT_PASSWORD: somewordpress
+        MYSQL_DATABASE: wordpress
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress
       exec:
         - ip addr add 192.168.0.81/24 dev eth1
 
