@@ -3,8 +3,8 @@ name: hackathon
 
 mgmt:
   network: srl-hackathon-logging
-  ipv4_subnet: 100.101.0.0/24
-  ipv6_subnet: fc00:100:101::/64
+  ipv4-subnet: 100.101.0.0/24
+  ipv6-subnet: fc00:100:101::/64
 
 topology:
   kinds:
@@ -21,37 +21,37 @@ topology:
     leaf1:
       kind: srl
       type: ixrd2
-      mgmt_ipv4: 100.101.0.11
-      mgmt_ipv6: fc00:100:101::11
+      mgmt-ipv4: 100.101.0.11
+      mgmt-ipv6: fc00:100:101::11
     leaf2:
       kind: srl
       type: ixrd2
-      mgmt_ipv4: 100.101.0.12
-      mgmt_ipv6: fc00:100:101::12
+      mgmt-ipv4: 100.101.0.12
+      mgmt-ipv6: fc00:100:101::12
     spine1:
       kind: srl
       type: ixrd3
-      mgmt_ipv4: 100.101.0.101
-      mgmt_ipv6: fc00:100:101::101
+      mgmt-ipv4: 100.101.0.101
+      mgmt-ipv6: fc00:100:101::101
     srv1:
       kind: linux
-      mgmt_ipv4: 100.101.0.51
-      mgmt_ipv6: fc00:100:101::51
+      mgmt-ipv4: 100.101.0.51
+      mgmt-ipv6: fc00:100:101::51
       exec:
         - ip link set address 00:c1:ab:00:00:01 dev eth1
         - ip addr add 192.168.0.1/24 dev eth1
     srv2:
       kind: linux
-      mgmt_ipv4: 100.101.0.52
-      mgmt_ipv6: fc00:100:101::52
+      mgmt-ipv4: 100.101.0.52
+      mgmt-ipv6: fc00:100:101::52
       exec:
         - ip link set address 00:c1:ab:00:00:02 dev eth1
         - ip addr add 192.168.0.2/24 dev eth1
     # logging stack
     elastic:
       kind: linux
-      mgmt_ipv4: 100.101.0.201
-      mgmt_ipv6: fc00:100:101::201
+      mgmt-ipv4: 100.101.0.201
+      mgmt-ipv6: fc00:100:101::201
       image: docker.elastic.co/elasticsearch/elasticsearch:7.17.7
       env:
         node.name: es01
@@ -61,8 +61,8 @@ topology:
         - 9200:9200/tcp
     logstash:
       kind: linux
-      mgmt_ipv4: 100.101.0.199
-      mgmt_ipv6: fc00:100:101::199
+      mgmt-ipv4: 100.101.0.199
+      mgmt-ipv6: fc00:100:101::199
       image: docker.elastic.co/logstash/logstash:7.17.7
       cmd: --config.reload.automatic
       binds:
@@ -75,8 +75,8 @@ topology:
         - elastic
     kibana:
       kind: linux
-      mgmt_ipv4: 100.101.0.200
-      mgmt_ipv6: fc00:100:101::200
+      mgmt-ipv4: 100.101.0.200
+      mgmt-ipv6: fc00:100:101::200
       image: docker.elastic.co/kibana/kibana:7.17.7
       binds:
         - ./elk/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
