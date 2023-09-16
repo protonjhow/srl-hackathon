@@ -90,6 +90,8 @@ topology:
       image: wordpress:latest
       ports: 
         - 8181:80/tcp
+      binds: 
+        - ./wordpress/app/:/var/www/html
       env:
         WORDPRESS_DB_HOST: 192.168.0.81
         WORDPRESS_DB_USER: wordpress
