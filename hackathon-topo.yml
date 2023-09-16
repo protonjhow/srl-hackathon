@@ -88,11 +88,11 @@ topology:
     wordpress-app:
       kind: linux
       image: wordpress:latest
-      environment:
-      - WORDPRESS_DB_HOST=db
-      - WORDPRESS_DB_USER=wordpress
-      - WORDPRESS_DB_PASSWORD=wordpress
-      - WORDPRESS_DB_NAME=wordpress
+      env:
+        - WORDPRESS_DB_HOST=db
+        - WORDPRESS_DB_USER=wordpress
+        - WORDPRESS_DB_PASSWORD=wordpress
+        - WORDPRESS_DB_NAME=wordpress
       exec:
         - ip addr add 192.168.0.80/24 dev eth1
     wordpress-db:
@@ -101,11 +101,11 @@ topology:
       cmd: "--default-authentication-plugin=mysql_native_password"
       binds: 
         - ./wordpress/db/:/var/lib/mysql/
-      environment:
-      - MYSQL_ROOT_PASSWORD=somewordpress
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
+      env:
+        - MYSQL_ROOT_PASSWORD=somewordpress
+        - MYSQL_DATABASE=wordpress
+        - MYSQL_USER=wordpress
+        - MYSQL_PASSWORD=wordpress
       exec:
         - ip addr add 192.168.0.81/24 dev eth1
 
