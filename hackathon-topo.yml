@@ -89,7 +89,7 @@ topology:
       kind: linux
       image: wordpress:latest
       ports: 
-        - 8181:80/tcp
+        - 9000:9000/tcp
       binds: 
         - ./wordpress/app/:/var/www/html
       env:
