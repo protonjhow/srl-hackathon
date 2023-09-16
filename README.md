@@ -28,7 +28,7 @@ pip3 install -r requirements.txt
 
 Now you have a working env (or poetry working) here is the basics (all from within the `hackathon` folder):
 
-Option1: simply `make deploy-clab-ci` (we assume you have `jq` installed btw. who doesnt?)
+Option1: simply `make deploy-hackathon` (we assume you have `jq` installed btw. who doesnt?)
 
 Option2:
 
