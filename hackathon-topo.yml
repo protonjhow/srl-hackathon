@@ -84,6 +84,32 @@ topology:
         - 5601:5601/tcp
       wait-for:
         - elastic
+    # services
+    wordpress-app:
+      kind: linux
+      image: wordpress:latest
+      environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+      exec:
+        - ip addr add 192.168.0.80/24 dev eth1
+    wordpress-db:
+      kind: linux
+      image: mariadb:10.6.4-focal
+      cmd: "--default-authentication-plugin=mysql_native_password"
+      binds: 
+        - ./wordpress/db/:/var/lib/mysql/
+      environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+      exec:
+        - ip addr add 192.168.0.81/24 dev eth1
+
+
   links:
     # inter-switch links
     - endpoints: ["leaf1:e1-49", "spine1:e1-1"]
@@ -91,3 +117,5 @@ topology:
     # server links
     - endpoints: ["srv1:eth1", "leaf1:e1-1"]
     - endpoints: ["srv2:eth1", "leaf2:e1-1"]
+    - endpoints: ["wordpress-app:eth1", "leaf1:e1-2"]
+    - endpoints: ["wordpress-db:eth1", "leaf2:e1-2"]

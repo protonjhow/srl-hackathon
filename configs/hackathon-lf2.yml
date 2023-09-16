@@ -11,6 +11,16 @@ interface:
         vlan:
           encap:
             untagged: {}
+  - name: ethernet-1/2
+    admin-state: enable
+    vlan-tagging: true
+    subinterface:
+      - index: 0
+        type: bridged
+        admin-state: enable
+        vlan:
+          encap:
+            untagged: {}
   # spine
   - name: ethernet-1/49
     admin-state: enable
@@ -138,6 +148,7 @@ network-instance:
     admin-state: enable
     interface:
       - name: ethernet-1/1.0
+      - name: ethernet-1/2.0
       - name: irb1.0
     vxlan-interface:
       - name: vxlan1.1
