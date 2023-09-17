@@ -87,6 +87,8 @@ topology:
     # services
     wordpress-app:
       kind: linux
+      mgmt-ipv4: 100.101.0.80
+      mgmt-ipv6: fc00:100:101::80
       image: wordpress:latest
       ports: 
         - 8181:80/tcp
@@ -101,6 +103,8 @@ topology:
         - ip addr add 192.168.0.80/24 dev eth1
     wordpress-db:
       kind: linux
+      mgmt-ipv4: 100.101.0.81
+      mgmt-ipv6: fc00:100:101::81
       image: mariadb:10.6.4-focal
       cmd: "--default-authentication-plugin=mysql_native_password"
       binds: 
