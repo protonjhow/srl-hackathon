@@ -76,6 +76,13 @@ tunnel-interface:
         egress:
           source-ip: use-system-ipv4-address
 
+system:
+  mtu:
+    default-port-mtu: 9212
+    default-l2-mtu: 9212
+    default-ip-mtu: 9194
+    min-path-mtu: 9212
+
 routing-policy:
   policy:
     - name: all

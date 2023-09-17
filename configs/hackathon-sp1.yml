@@ -25,6 +25,13 @@ interface:
           address:
             - ip-prefix: 10.0.1.1/32
 
+system:
+  mtu:
+    default-port-mtu: 9212
+    default-l2-mtu: 9212
+    default-ip-mtu: 9194
+    min-path-mtu: 9212
+
 routing-policy:
   policy:
     - name: all
