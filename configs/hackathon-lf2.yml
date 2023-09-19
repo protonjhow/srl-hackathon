@@ -157,6 +157,7 @@ network-instance:
     admin-state: enable
     interface:
       - name: irb1.0
+      - name: irb1.1
     vxlan-interface:
       - name: vxlan1.10000
     protocols:
