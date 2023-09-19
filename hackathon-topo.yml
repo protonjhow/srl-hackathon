@@ -101,6 +101,7 @@ topology:
         WORDPRESS_DB_NAME: wordpress
       exec:
         - ip addr add 192.168.0.80/24 dev eth1
+        - ip route add default via 192.168.0.254
     wordpress-db:
       kind: linux
       mgmt-ipv4: 100.101.0.81
@@ -116,6 +117,7 @@ topology:
         MYSQL_PASSWORD: wordpress
       exec:
         - ip addr add 192.168.1.81/24 dev eth1
+        - ip route add default via 192.168.1.254
 
 
   links:
