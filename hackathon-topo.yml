@@ -91,7 +91,7 @@ topology:
       mgmt-ipv6: fc00:100:101::80
       image: wordpress:latest
       ports: 
-        - 8181:80/tcp
+        - 80:80/tcp
       binds: 
         - ./wordpress/app/:/var/www/html
       env:
