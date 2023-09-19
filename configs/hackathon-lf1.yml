@@ -61,6 +61,24 @@ interface:
                 - route-type: dynamic
         anycast-gw:
           virtual-router-id: 1
+      - index: 1
+        admin-state: enable
+        ipv4:
+          admin-state: enable
+          address:
+            - ip-prefix: 192.168.1.254/24
+              anycast-gw: true
+          arp:
+            learn-unsolicited: true
+            host-route:
+              populate:
+                - route-type: static
+                - route-type: dynamic
+            evpn:
+              advertise:
+                - route-type: dynamic
+        anycast-gw:
+          virtual-router-id: 2
 
 tunnel-interface:
   - name: vxlan1
@@ -69,6 +87,10 @@ tunnel-interface:
         type: bridged
         ingress:
           vni: 1
+      - index: 2
+        type: bridged
+        ingress:
+          vni: 2
       - index: 10000
         type: routed
         ingress:
@@ -150,12 +172,11 @@ network-instance:
             route-target:
               export-rt: target:1:10000
               import-rt: target:1:10000
-  - name: vrf-1
+  - name: vlan-1
     type: mac-vrf
     admin-state: enable
     interface:
       - name: ethernet-1/1.0
-      - name: ethernet-1/2.0
       - name: irb1.0
     vxlan-interface:
       - name: vxlan1.1
@@ -172,3 +193,24 @@ network-instance:
             route-target:
               export-rt: target:1:1
               import-rt: target:1:1
+  - name: vlan-2
+    type: mac-vrf
+    admin-state: enable
+    interface:
+      - name: ethernet-1/2.0
+      - name: irb1.1
+    vxlan-interface:
+      - name: vxlan1.2
+    protocols:
+      bgp-evpn:
+        bgp-instance:
+          - id: 1
+            admin-state: enable
+            vxlan-interface: vxlan1.2
+            evi: 2
+      bgp-vpn:
+        bgp-instance:
+          - id: 1
+            route-target:
+              export-rt: target:1:2
+              import-rt: target:1:2

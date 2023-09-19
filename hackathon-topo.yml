@@ -95,7 +95,7 @@ topology:
       binds: 
         - ./wordpress/app/:/var/www/html
       env:
-        WORDPRESS_DB_HOST: 192.168.0.81
+        WORDPRESS_DB_HOST: 192.168.1.81
         WORDPRESS_DB_USER: wordpress
         WORDPRESS_DB_PASSWORD: wordpress
         WORDPRESS_DB_NAME: wordpress
@@ -115,7 +115,7 @@ topology:
         MYSQL_USER: wordpress
         MYSQL_PASSWORD: wordpress
       exec:
-        - ip addr add 192.168.0.81/24 dev eth1
+        - ip addr add 192.168.1.81/24 dev eth1
 
 
   links:
