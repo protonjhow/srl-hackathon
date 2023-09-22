@@ -64,8 +64,11 @@ interface:
         acl: 
           input: 
             ipv4-filter: 
-              - "irb1_0_filter"
-      - index: 1
+              - "irb1_filter"
+  - name: irb2
+    admin-state: enable
+    subinterface:
+      - index: 0
         admin-state: enable
         ipv4:
           admin-state: enable
@@ -86,7 +89,7 @@ interface:
         acl: 
           input: 
             ipv4-filter: 
-              - "irb1_1_filter"
+              - "irb2_filter"
 
 tunnel-interface:
   - name: vxlan1
@@ -165,7 +168,7 @@ network-instance:
     admin-state: enable
     interface:
       - name: irb1.0
-      - name: irb1.1
+      - name: irb2.0
     vxlan-interface:
       - name: vxlan1.10000
     protocols:
@@ -207,7 +210,7 @@ network-instance:
     admin-state: enable
     interface:
       - name: ethernet-1/2.0
-      - name: irb1.1
+      - name: irb2.0
     vxlan-interface:
       - name: vxlan1.2
     protocols:
@@ -225,7 +228,7 @@ network-instance:
               import-rt: target:1:2
 acl:
   ipv4-filter:
-    - name: irb1_0_filter
+    - name: irb1_filter
       entry:
         - sequence-id: 1000
           description: mysql from wp-app to wp-db on tcp/3306
@@ -244,7 +247,7 @@ acl:
           action:
             drop:
               log: true
-    - name: irb1_1_filter
+    - name: irb2_filter
       entry:
         - sequence-id: 1000
           description: internet to wp-app on tcp/80
