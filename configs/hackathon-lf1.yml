@@ -61,6 +61,11 @@ interface:
                 - route-type: dynamic
         anycast-gw:
           virtual-router-id: 1
+        acl: 
+          input: 
+            ipv4-filter: 
+              - "permit_ipv4_tcp_any_wpapp_dport_80"
+              - "default_deny"
       - index: 1
         admin-state: enable
         ipv4:
@@ -79,6 +84,11 @@ interface:
                 - route-type: dynamic
         anycast-gw:
           virtual-router-id: 2
+        acl: 
+          input: 
+            ipv4-filter: 
+              - "permit_ipv4_tcp_wpapp_wpdb_dport_3306"
+              - "default_deny"
 
 tunnel-interface:
   - name: vxlan1
@@ -215,3 +225,41 @@ network-instance:
             route-target:
               export-rt: target:1:2
               import-rt: target:1:2
+
+acl:
+  ipv4-filter:
+    - name: default_deny
+      entry:
+        - sequence-id: 65535
+          description: default deny
+          action:
+            drop:
+              log: true
+    - name: permit_ipv4_tcp_wpapp_wpdb_dport_3306
+      entry:
+        - sequence-id: 1000
+          description: mysql from wp-app to wp-db on tcp/3306
+          action:
+            accept: {}
+          match:
+            protocol: tcp
+            source-ip:
+              prefix: 192.168.0.80/32
+            destination-ip:
+              prefix: 192.168.1.81/32
+            destination-port:
+              value: 3306
+    - name: permit_ipv4_tcp_any_wpapp_dport_80
+      entry:
+        - sequence-id: 1000
+          description: internet to wp-app on tcp/80
+          action:
+            accept: {}
+          match:
+            protocol: tcp
+            destination-ip:
+              prefix: 192.168.0.80/32
+            source-ip:
+              prefix: 0.0.0.0/0
+            destination-port:
+              value: 80
