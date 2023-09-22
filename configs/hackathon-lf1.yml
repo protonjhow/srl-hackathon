@@ -231,7 +231,7 @@ acl:
     - name: irb1_filter
       entry:
         - sequence-id: 1000
-          description: mysql from wp-app to wp-db on tcp/3306
+          description: mysql from wp-app to wp-db on tcp/3306 out
           action:
             accept: {}
           match:
@@ -242,6 +242,18 @@ acl:
               prefix: 192.168.1.81/32
             destination-port:
               value: 3306
+        - sequence-id: 1001
+          description: internet to wp-app on tcp/80 in
+          action:
+            accept: {}
+          match:
+            protocol: tcp
+            destination-ip:
+              prefix: 0.0.0.0/0
+            source-ip:
+              prefix: 192.168.0.80/32
+            source-port:
+              value: 80
         - sequence-id: 65535
           description: default deny
           action:
@@ -250,7 +262,7 @@ acl:
     - name: irb2_filter
       entry:
         - sequence-id: 1000
-          description: internet to wp-app on tcp/80
+          description: internet to wp-app on tcp/80 out
           action:
             accept: {}
           match:
@@ -261,6 +273,18 @@ acl:
               prefix: 0.0.0.0/0
             destination-port:
               value: 80
+        - sequence-id: 1001
+          description: mysql from wp-app to wp-db on tcp/3306 in
+          action:
+            accept: {}
+          match:
+            protocol: tcp
+            source-ip:
+              prefix: 192.168.1.81/32
+            destination-ip:
+              prefix: 192.168.0.80/32
+            source-port:
+              value: 3306
         - sequence-id: 65535
           description: default deny
           action:
