@@ -63,7 +63,8 @@ interface:
           virtual-router-id: 1
         acl: 
           input: 
-            ipv4-filter: "irb1_filter"
+            ipv4-filter: 
+              - "irb1_filter"
   - name: irb2
     admin-state: enable
     subinterface:
@@ -87,7 +88,8 @@ interface:
           virtual-router-id: 2
         acl: 
           input: 
-            ipv4-filter: "irb2_filter"
+            ipv4-filter: 
+              - "irb2_filter"
 
 tunnel-interface:
   - name: vxlan1
