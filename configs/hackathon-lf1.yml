@@ -64,8 +64,7 @@ interface:
         acl: 
           input: 
             ipv4-filter: 
-              - "permit_ipv4_tcp_any_wpapp_dport_80"
-              - "default_deny"
+              - "irb1_0_filter"
       - index: 1
         admin-state: enable
         ipv4:
@@ -87,8 +86,7 @@ interface:
         acl: 
           input: 
             ipv4-filter: 
-              - "permit_ipv4_tcp_wpapp_wpdb_dport_3306"
-              - "default_deny"
+              - "irb1_1_filter"
 
 tunnel-interface:
   - name: vxlan1
