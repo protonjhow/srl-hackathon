@@ -225,17 +225,9 @@ network-instance:
             route-target:
               export-rt: target:1:2
               import-rt: target:1:2
-
 acl:
   ipv4-filter:
-    - name: default_deny
-      entry:
-        - sequence-id: 65535
-          description: default deny
-          action:
-            drop:
-              log: true
-    - name: permit_ipv4_tcp_wpapp_wpdb_dport_3306
+    - name: irb1_0_filter
       entry:
         - sequence-id: 1000
           description: mysql from wp-app to wp-db on tcp/3306
@@ -249,7 +241,12 @@ acl:
               prefix: 192.168.1.81/32
             destination-port:
               value: 3306
-    - name: permit_ipv4_tcp_any_wpapp_dport_80
+        - sequence-id: 65535
+          description: default deny
+          action:
+            drop:
+              log: true
+    - name: irb1_1_filter
       entry:
         - sequence-id: 1000
           description: internet to wp-app on tcp/80
@@ -263,3 +260,8 @@ acl:
               prefix: 0.0.0.0/0
             destination-port:
               value: 80
+        - sequence-id: 65535
+          description: default deny
+          action:
+            drop:
+              log: true
